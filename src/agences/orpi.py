@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.options import Options
 #project
 from conf import FIREFOX_DRIVER
 from helpers import get_text_data, append_csv, _serialize_html, _get_local_html
@@ -15,9 +15,11 @@ URL = BASE_URL + '/recherche/buy?realEstateTypes%5B%5D=maison&locations%5B0%5D%5
 
 def get_html():
 
-    browser_opt = Options()
-    browser_opt.add_argument("--window-size=1920,1080")
-    driver = webdriver.Firefox(executable_path=FIREFOX_DRIVER)
+    # the interface for turning on headless mode 
+    options = Options()
+    options.headless = True
+
+    driver = webdriver.Firefox(executable_path=FIREFOX_DRIVER, options=options)
     driver.get(URL)
 
     time.sleep(2.5)
