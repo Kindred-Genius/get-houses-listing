@@ -1,6 +1,7 @@
 name: get-house-listing
 channels:
   - defaults
+  - conda-forge
 dependencies:
   - beautifulsoup4=4.12.2=py310hca03da5_0
   - brotlipy=0.7.0=py310h1a28f6b_1002
