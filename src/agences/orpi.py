@@ -7,17 +7,17 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 #project
+from conf import FIREFOX_DRIVER
 from helpers import get_text_data, append_csv, _serialize_html, _get_local_html
 
 BASE_URL = 'https://www.orpi.com'
 URL = BASE_URL + '/recherche/buy?realEstateTypes%5B%5D=maison&locations%5B0%5D%5Bvalue%5D=vernon&locations%5B0%5D%5Blabel%5D=Vernon%20%2827200%29&sort=date-down&layoutType=mixte&recentlySold=false'
-CHROME_DRIVER = "/Users/aba/home/utils/chromedriver/chromedriver"
 
 def get_html():
 
-    chrome_options = Options()
-    chrome_options.add_argument("--window-size=1920,1080")
-    driver = webdriver.Chrome(executable_path=CHROME_DRIVER, options=chrome_options)
+    browser_opt = Options()
+    browser_opt.add_argument("--window-size=1920,1080")
+    driver = webdriver.Firefox(executable_path=FIREFOX_DRIVER)
     driver.get(URL)
 
     time.sleep(2.5)
