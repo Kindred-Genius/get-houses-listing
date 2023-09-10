@@ -7,7 +7,6 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
 #project
-from conf import FIREFOX_DRIVER
 from helpers import get_text_data, append_csv, _serialize_html, _get_local_html
 
 BASE_URL = 'https://www.orpi.com'
@@ -19,10 +18,10 @@ def get_html():
     options = Options()
     options.headless = True
 
-    driver = webdriver.Firefox(executable_path=FIREFOX_DRIVER, options=options)
+    driver = webdriver.Firefox(options=options)
     driver.get(URL)
 
-    time.sleep(2.5)
+    time.sleep(4)
 
     html = driver.page_source
 
