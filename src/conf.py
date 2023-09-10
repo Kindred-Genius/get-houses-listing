@@ -1,7 +1,5 @@
 import os
 
-print(os.environ["PATH"])
-
 CHROME_DRIVER = "/Users/aba/home/utils/chromedriver/chromedriver"
 if not "geckodriver" in os.environ["PATH"]: FIREFOX_DRIVER = "/Users/aba/home/utils/firefoxdriver/geckodriver"
 else: FIREFOX_DRIVER = ""

@@ -15,28 +15,22 @@ import agences.safti
 import agences.square_habitat
 import agences.vernon_immo
 
-# agences.agence_bizy.init()
-# agences.arthur_immo.init()
-# agences.auparkimmo.init()
-# agences.century.init()
-# agences.demeures_normandes.init()
-# agences.desjardins.init()
-
-# agences.ifc_conseil.init()
-
-# agences.joubeaux.init()
-# agences.laforet.init()
-
-# agences.laref.init()
-
-# agences.lesage.init()
-
-# agences.orpi.init()
-
+agences.agence_bizy.init()
+agences.arthur_immo.init()
+agences.auparkimmo.init()
+agences.century.init()
+agences.demeures_normandes.init()
+agences.desjardins.init()
+agences.ifc_conseil.init()
+agences.joubeaux.init()
+agences.laforet.init()
+agences.laref.init()
+agences.lesage.init()
 agences.square_habitat.init()
+agences.plaza.init()
+agences.vernon_immo.init()
 
-# agences.plaza.init()
-# agences.vernon_immo.init()
-
+# 
 # agences.safti.init()
+# agences.orpi.init()
 # 
