@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.firefox.options import Options
 #project
 from helpers import get_text_data, append_csv
 
@@ -13,7 +14,12 @@ URL = BASE_URL
 CHROME_DRIVER = "/Users/aba/home/utils/chromedriver/chromedriver"
 
 def get_html():
-    driver = webdriver.Chrome(CHROME_DRIVER)
+    # the interface for turning on headless mode 
+    options = Options()
+    options.headless = True
+
+    driver = webdriver.Firefox(options=options)
+
     driver.get(URL)
 
     time.sleep(3)

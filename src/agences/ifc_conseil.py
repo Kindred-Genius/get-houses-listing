@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.options import Options
 #project
 from helpers import get_text_data, append_csv, _serialize_html, _get_local_html
 
@@ -15,9 +15,12 @@ CHROME_DRIVER = "/Users/aba/home/utils/chromedriver/chromedriver"
 
 def get_html():
 
-    chrome_options = Options()
-    chrome_options.add_argument("--window-size=1920,1080")
-    driver = webdriver.Chrome(executable_path=CHROME_DRIVER, options=chrome_options)
+    # the interface for turning on headless mode 
+    options = Options()
+    options.headless = True
+
+    driver = webdriver.Firefox(options=options)
+
     driver.get(URL)
 
     time.sleep(3.5)
