@@ -6,6 +6,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
+from selenium.common.exceptions import NoSuchElementException
 #project
 from helpers import get_text_data, append_csv
 
@@ -22,8 +23,14 @@ def get_html():
 
     driver.get(URL)
 
-    time.sleep(3)
+    time.sleep(5)
 
+    try: privacy_btn = driver.find_element(By.ID, 'popin_tc_privacy_button')
+    except NoSuchElementException: print('No privacy window detected...')
+    else:
+        privacy_btn.click()
+        time.sleep(1)
+    
     input_location = driver.find_element(By.ID, 'cphContent_ctl00_txtGeoloc1A')
     input_location.send_keys('Vernon')
     time.sleep(1)

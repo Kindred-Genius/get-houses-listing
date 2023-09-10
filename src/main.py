@@ -22,12 +22,12 @@ import agences.vernon_immo
 # agences.demeures_normandes.init()
 # agences.desjardins.init()
 
-agences.ifc_conseil.init()
+# agences.ifc_conseil.init()
 
 # agences.joubeaux.init()
 # agences.laforet.init()
 
-agences.laref.init()
+# agences.laref.init()
 
 # agences.lesage.init()
 
