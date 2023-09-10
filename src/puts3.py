@@ -1,13 +1,16 @@
 import boto3
+import os
+from datetime import date
 
-some_binary_data = b'Here we have some data'
-more_binary_data = b'Here we have some more data'
+def get_today_date():
+    todays = date.today()
+    return todays.year, todays.month, todays.day 
 
-# Method 1: Object.put()
+bucket_name = 'aba-get-house-listing'
+path = 'tmp/'
+year, month, day = get_today_date()
 s3 = boto3.resource('s3')
-object = s3.Object('aba-get-house-listing', 'my/key/including/filename.txt')
-object.put(Body=some_binary_data)
 
-# Method 2: Client.put_object()
-client = boto3.client('s3')
-client.put_object(Body=more_binary_data, Bucket='aba-get-house-listing', Key='my/key/including/anotherfilename.txt')
+for subdir, dirs, files in os.walk(path):
+    for file in files:
+        s3.meta.client.upload_file(f'{path}{file}', bucket_name, f'{year}/{month}/{day}/{file}')
