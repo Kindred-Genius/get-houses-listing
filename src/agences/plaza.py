@@ -16,7 +16,7 @@ def get_html():
     options = Options()
     options.headless = True
 
-    driver = webdriver.Firefox(executable_path=FIREFOX_DRIVER, options=options)
+    driver = webdriver.Firefox(options=options)
     driver.get(URL)
 
     time.sleep(4)

@@ -13,4 +13,7 @@ wget https://github.com/mozilla/geckodriver/releases/download/v0.33.0/geckodrive
 
 git clone https://github.com/Kindred-Genius/get-houses-listing.git
 
-ssh-keygen -t rsa -b 4096 -C "kindred-genius-0o@icloud.com"
+ssh-keygen -t rsa -b 4096 -C "emailaddress@example.com"
+
+export PATH="$PATH:/home/ubuntu/firefoxdriver"
+export PATH="$PATH:/Users/aba/home/utils/firefoxdriver"
