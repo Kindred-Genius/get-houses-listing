@@ -3,15 +3,20 @@ import time
 #Web scrapping
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
 #project
+from conf import FIREFOX_DRIVER
 from helpers import get_text_data, append_csv, _serialize_html
 
 BASE_URL = 'https://www.stephaneplazaimmobilier.com'
 URL = BASE_URL + '/immobilier-acheter?type=2&location=27681&now=1&page=2'
-CHROME_DRIVER = "/Users/aba/home/utils/chromedriver/chromedriver"
 
 def get_html():
-    driver = webdriver.Chrome(CHROME_DRIVER)
+    # the interface for turning on headless mode 
+    options = Options()
+    options.headless = True
+
+    driver = webdriver.Firefox(executable_path=FIREFOX_DRIVER, options=options)
     driver.get(URL)
 
     time.sleep(4)

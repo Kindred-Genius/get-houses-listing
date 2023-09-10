@@ -61,6 +61,7 @@ def fetch(html='test'):
 
 def init():
     html = get_html()
+    _serialize_html(html, "orpi.html")
     fetch(html)
 
 if __name__ == "__main__":

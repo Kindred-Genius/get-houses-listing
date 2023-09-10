@@ -5,22 +5,23 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.options import Options
 #project
+from conf import FIREFOX_DRIVER
 from helpers import get_text_data, append_csv, _get_local_html
 
 BASE_URL = 'https://www.joubeaux-immobilier.com'
 URL = BASE_URL
-CHROME_DRIVER = "/Users/aba/home/utils/chromedriver/chromedriver"
 
 def get_html():
+    # the interface for turning on headless mode 
+    options = Options()
+    options.headless = True
 
-    chrome_options = Options()
-    chrome_options.add_argument("--window-size=1920,1080")
-    driver = webdriver.Chrome(executable_path=CHROME_DRIVER, options=chrome_options)
+    driver = webdriver.Firefox(executable_path=FIREFOX_DRIVER, options=options)
     driver.get(URL)
 
-    time.sleep(2)
+    time.sleep(3)
 
     input_location = driver.find_element(By.XPATH, '/html/body/header/div/div/div[2]/div[2]/div[2]/section/div/form/div[1]/fieldset/div/div/div/div[4]/div[2]/div[1]/input')
     input_location.send_keys('Vernon')

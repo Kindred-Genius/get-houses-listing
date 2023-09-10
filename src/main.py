@@ -26,9 +26,9 @@ import agences.vernon_immo
 # agences.laforet.init()
 # agences.laref.init()
 # agences.lesage.init()
-agences.orpi.init()
+# agences.orpi.init()
 # agences.square_habitat.init()
-# agences.plaza.init()
+agences.plaza.init()
 # agences.vernon_immo.init()
 # agences.safti.init()
 # 

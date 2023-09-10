@@ -12,3 +12,5 @@ conda install beautifulsoup4 requests selenium -y
 wget https://github.com/mozilla/geckodriver/releases/download/v0.33.0/geckodriver-v0.33.0-linux-aarch64.tar.gz
 
 git clone https://github.com/Kindred-Genius/get-houses-listing.git
+
+ssh-keygen -t rsa -b 4096 -C "kindred-genius-0o@icloud.com"
