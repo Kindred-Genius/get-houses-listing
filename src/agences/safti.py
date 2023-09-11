@@ -41,7 +41,7 @@ def fetch(html='test'):
 
         price, surface, room, bedrooms = get_text_data(card.prettify())
         house_data.append({
-            "source": "safti",
+            "source": __name__,
             "house_ref": house_ref,
             "url": f'{BASE_URL}{relative_url}',
             "price": price,
@@ -49,7 +49,7 @@ def fetch(html='test'):
             "room": room,
             "bedrooms": bedrooms
         })
-    append_csv(house_data)
+    append_csv(house_data, __name__)
 
 def init():
     html = get_html()

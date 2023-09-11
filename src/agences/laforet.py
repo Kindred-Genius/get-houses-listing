@@ -20,7 +20,7 @@ def fetch(url):
         house_ref = relative_url.split('-')[-1]
         price, surface, room, bedrooms = get_text_data(house.find("div", class_="card-bottom").text)
         house_data.append({
-            "source": "la-foret",
+            "source": __name__,
             "house_ref": house_ref,
             "url": f'{BASE_URL}{relative_url}',
             "price": price,
@@ -28,7 +28,7 @@ def fetch(url):
             "room": room,
             "bedrooms": bedrooms
         })
-    append_csv(house_data)
+    append_csv(house_data, __name__)
 
 def init():
     fetch(URL)

@@ -45,7 +45,7 @@ def fetch(html):
         house_refs[house_ref] = True
         price, surface, room, bedrooms = get_text_data(house.text)
         house_data.append({
-            "source": "plaza",
+            "source": __name__,
             "house_ref": house_ref,
             "url": f'{BASE_URL}{relative_url}',
             "price": price,
@@ -53,7 +53,7 @@ def fetch(html):
             "room": room,
             "bedrooms": bedrooms
         })
-    append_csv(house_data)
+    append_csv(house_data, __name__)
 
 def init():
     html = get_html()

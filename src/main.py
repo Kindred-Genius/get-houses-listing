@@ -1,3 +1,5 @@
+import puts3
+#
 import agences.arthur_immo
 import agences.agence_bizy
 import agences.auparkimmo
@@ -34,3 +36,5 @@ agences.vernon_immo.init()
 # agences.safti.init()
 # agences.orpi.init()
 # 
+
+puts3.put_csv_s3()

@@ -71,9 +71,10 @@ def get_text_data(data):
 def return_csv_line(house):
     return ','.join(list(house.values()))
 
-def append_csv(house_data, file_path='./tmp/scrape.csv'):
+def append_csv(house_data, filename='unknown'):
+    csv_filepath = f'./tmp/{filename}_scrape.csv'
     csv_data = list(map((lambda x: return_csv_line(x)), house_data))  
-    with open(file_path, 'a') as file:
+    with open(csv_filepath, 'a') as file:
          file.write('\n'.join(csv_data) + '\n')
 
 def decode_str(str):
