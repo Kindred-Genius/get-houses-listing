@@ -1,5 +1,6 @@
 #!/bin/bash
 
+conda init bash
 conda activate gethouses
 export PATH="$PATH:/home/ubuntu/firefoxdriver"
 cd project/get-houses-listing/
