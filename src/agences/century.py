@@ -7,7 +7,7 @@ from conf import HEADERS
 from helpers import get_text_data, append_csv, _serialize_html
 
 BASE_URL = 'https://www.century21.fr'
-URL = BASE_URL + '/annonces/f/achat-maison-terrain-parking-immeuble-divers/cpv-27200_vernon'
+URL = BASE_URL + '/annonces/achat-maison/cpv-27200_vernon'
 
 def fetch(url):
     response = requests.get(url=url, headers=HEADERS)
@@ -16,11 +16,12 @@ def fetch(url):
     page_max = 2
     page_curr = 2
     while page_curr <= page_max:
-        time.sleep(1)
+        time.sleep(2)
         response = requests.get(url=f'{url}/page-{page_curr}', headers=HEADERS)
         html += response.text
         page_curr += 1
     
+    # _serialize_html(html, 'century21.html')
     soup = BeautifulSoup(html, "html.parser")
 
     house_lists = soup.find_all("div", class_="js-the-list-of-properties-list-property")
