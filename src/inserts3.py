@@ -1,7 +1,5 @@
 import boto3
 
-# boto3.setup_default_session(profile_name="ah")
-
 dynamodb_client = boto3.client("dynamodb", region_name='eu-west-1')
 
 table_name = "aba-get-house-listing"
