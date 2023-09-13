@@ -8,13 +8,13 @@ def get_today_date():
 
 def put_csv_s3():
     bucket_name = 'aba-get-house-listing'
-    path = 'tmp/'
+    dir = 'tmp/'
     year, month, day = get_today_date()
     s3 = boto3.resource('s3')
 
-    for subdir, dirs, files in os.walk(path):
+    for subdir, dirs, files in os.walk(dir):
         for file in files:
-            s3.meta.client.upload_file(f'{path}{file}', bucket_name, f'{year}/{month}/{day}/{file}')
+            s3.meta.client.upload_file(f'{dir}{file}', bucket_name, f'{year}/{month}/{day}/{file}')
 
     # Deleting files from tmp
     for f in os.listdir(dir):
