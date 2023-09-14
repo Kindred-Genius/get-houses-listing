@@ -13,4 +13,17 @@ response = dynamodb_client.put_item(
         "house_value": {"N": "264000"},
     },
 )
-print(response)
+
+try:
+    table.put_item(
+        Item={
+            'foo':1,
+            'bar':2,
+        },
+        ConditionExpression='attribute_not_exists(foo) AND attribute_not_exists(bar)'
+    )
+except botocore.exceptions.ClientError as e:
+    # Ignore the ConditionalCheckFailedException, bubble up
+    # other exceptions.
+    if e.response['Error']['Code'] != 'ConditionalCheckFailedException':
+        raise
