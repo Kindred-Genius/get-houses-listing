@@ -10,6 +10,7 @@ URL = BASE_URL + '/recherche-avancee/?type=maison'
 
 def get_html():
     
+    print(URL)
     response = requests.get(url=URL, headers=HEADERS)
     response.raise_for_status()
     html = response.text
