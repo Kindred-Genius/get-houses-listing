@@ -15,7 +15,7 @@ def load_item_csv(csv):
 def load_item_db(test):
     response = dynamodb_client.query(
         TableName=TABLE_NAME,
-        KeyConditionExpression='agence_name = :agence_name',
+        KeyConditionExpression='house_id = :house_id AND agence_name = :agence_name',
         ExpressionAttributeValues={
             ':house_id': {'S': '*'},
             ':agence_name': {'S': 'agences.demeures_normandes'}
