@@ -1,12 +1,30 @@
+import pandas as pd
 import boto3
 
 dynamodb_client = boto3.client("dynamodb")
+TABLE_NAME = "aba-get-house-listing"
 
-table_name = "aba-get-house-listing"
+#
+item_csv_data = {}
 
-def put_item_in_DB(item):
+def load_item_csv(csv):
+    df = pd.read_csv(csv, header=0, index_col=1)
+    item_csv_data = df.to_dict('index')
+    return item_csv_data
+
+def load_item_db(test):
+    response = dynamodb_client.query(
+        TableName=TABLE_NAME,
+        KeyConditionExpression='agence_name = :agence_name',
+        ExpressionAttributeValues={
+            ':agence_name': {'S': 'agences.demeures_normandes'}
+        }
+    )
+    print(response['Items'])
+
+def put_new_item(item):
     response = dynamodb_client.put_item(
-        TableName=table_name,
+        TableName=TABLE_NAME,
         Item={
             "house_id": {"S": "111-350174"},
             "agence_name": {"S": "agences.demeures_normandes"},
@@ -18,4 +36,4 @@ def put_item_in_DB(item):
         },
     )
 
-put_item_in_DB('test')
+load_item_db('tmp/agences.demeures_normandes_scrape.csv')

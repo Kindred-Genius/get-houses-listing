@@ -15,7 +15,7 @@ conda create --name gethouses python=3.10
 
 conda activate gethouses
 
-conda install beautifulsoup4 requests selenium -y 
+conda install beautifulsoup4 requests selenium boto3 pandas -y 
 
 wget https://github.com/mozilla/geckodriver/releases/download/v0.33.0/geckodriver-v0.33.0-linux-aarch64.tar.gz
 wget https://github.com/mozilla/geckodriver/releases/download/v0.33.0/geckodriver-v0.33.0-linux64.tar.gz
