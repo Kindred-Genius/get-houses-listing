@@ -17,6 +17,7 @@ def load_item_db(test):
         TableName=TABLE_NAME,
         KeyConditionExpression='agence_name = :agence_name',
         ExpressionAttributeValues={
+            ':house_id': {'S': '*'},
             ':agence_name': {'S': 'agences.demeures_normandes'}
         }
     )
