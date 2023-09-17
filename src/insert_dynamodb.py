@@ -13,13 +13,13 @@ def load_item_csv(csv):
     item_csv_data = df.to_dict('index')
     return item_csv_data
 
-def load_item_db(test):
+def load_item_db():
     # Use the DynamoDB client to query for all songs by artist Arturus Ardvarkian
     response = dynamodb_client.query(
     TableName=TABLE_NAME,
     KeyConditionExpression='agence_name = :agence_name',
     ExpressionAttributeValues={
-        ':agence_name': {'S': 'Arturus Ardvarkian'}
+        ':agence_name': {'S': 'century'}
     })
     print(response['Items'])
 
@@ -49,7 +49,7 @@ items = [{
             "date_deleted": {"S": ""},
         },
         {
-            "agence_name": {"S": "agences.demeures_normandes"},
+            "agence_name": {"S": "demeures_normandes"},
             "house_id": {"S": "111-350174"},
             "house_url": {"S": "https://auxdemeuresnormandes.com/property/maison-de-174-m%c2%b2-a-15-mn-de-vernon/"},
             "house_value": {"N": "350000"},
@@ -58,8 +58,9 @@ items = [{
             "date_deleted": {"S": ""},
         }]
 
-# load_item_db('tmp/agences.demeures_normandes_scrape.csv')
+# load_item_csv('tmp/agences.demeures_normandes_scrape.csv')
+load_item_db()
 
-for item in items:
-    put_new_item(item)
-    time.sleep(1)
+# for item in items:
+#     put_new_item(item)
+#     time.sleep(1)
