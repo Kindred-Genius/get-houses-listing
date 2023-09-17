@@ -6,7 +6,7 @@ from datetime import date
 TABLE_NAME = "aba-get-house-listing"
 DATE_FORMAT = "%Y-%m-%d"
 
-dynamodb_client = boto3.client("dynamodb")
+dynamodb_client = boto3.resource("dynamodb")
 table = dynamodb_client.Table(TABLE_NAME)
 
 today = date.today().strftime(DATE_FORMAT)
