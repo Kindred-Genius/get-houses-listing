@@ -43,4 +43,6 @@ item_csv_data = load_item_csv('tmp/demeures_normandes_scrape.csv')
 for _, house_info in item_csv_data.items():
     houses_batch.append(construct_item(house_info))
 
+print(houses_batch[0])
+
 write_batch(houses_batch)
