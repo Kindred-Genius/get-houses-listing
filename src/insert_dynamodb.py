@@ -94,7 +94,7 @@ def put_new_item(item):
     return response
 
 def update_house(house_id, agence_name, updated_item):
-    expression = [f'{key[1:]}=:{key}' for key in updated_item.keys()]
+    expression = [f'{key[1:]}={key}' for key in updated_item.keys()]
     print(f'set {", ".join(expression)}')
     response = dynamodb_client.update_item(
         TableName=TABLE_NAME,
