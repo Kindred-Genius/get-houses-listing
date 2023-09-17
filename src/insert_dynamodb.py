@@ -49,7 +49,7 @@ def compare_db_csv_data(item_csv_data, item_db_data):
             new_item = construct_item(house_id, house_info)
             put_new_item(new_item)
             time.sleep(0.5)
-        elif house_value != int(item_db_data[house_value]):
+        elif house_value != int(item_db_data[house_id]):
             print(house_id, ': exist but price different')
             updated_item = construct_updated_item(house_info)
             update_house(house_id, house_info['agence_name'], updated_item)
