@@ -66,7 +66,7 @@ def get_text_data(data):
     surface = find_in_array(cleaned_arr, 'm²', 'm2')
     room = find_in_array(cleaned_arr, 'pièce')
     bedrooms = find_in_array(cleaned_arr, 'chambre')
-    return price, surface, room, bedrooms
+    return price.replace(',', ''), surface.replace(',', ''), room.replace(',', ''), bedrooms.replace(',', '')
 
 def return_csv_line(house):
     return ','.join(list(house.values()))
