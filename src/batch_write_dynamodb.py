@@ -6,8 +6,9 @@ from datetime import date
 TABLE_NAME = "aba-get-house-listing"
 DATE_FORMAT = "%Y-%m-%d"
 
-dynamodb_client = boto3.resource("dynamodb")
-table = dynamodb_client.Table(TABLE_NAME)
+dynamodb_client = boto3.client("dynamodb")
+dynamodb = boto3.resource("dynamodb")
+table = dynamodb.Table(TABLE_NAME)
 
 today = date.today().strftime(DATE_FORMAT)
 
@@ -38,6 +39,13 @@ def construct_item(house_info):
         "house_status": {"S": "New"},
         }
 
+def put_new_item(item):
+    response = dynamodb_client.put_item(
+        TableName=TABLE_NAME,
+        Item=item
+    )
+    return response
+
 item_csv_data = load_item_csv('tmp/demeures_normandes_scrape.csv')
 
 for _, house_info in item_csv_data.items():
@@ -45,4 +53,6 @@ for _, house_info in item_csv_data.items():
 
 print(houses_batch[0])
 
-write_batch(houses_batch)
+put_new_item(houses_batch[0])
+
+# write_batch(houses_batch)
