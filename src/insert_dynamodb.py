@@ -75,15 +75,15 @@ def construct_item(house_id, house_info):
 
 def construct_updated_item(house_info):
     return {
-        "house_value": {"N": str(get_price_int(house_info['house_value']))},
-        "date_modified": {"S": today},
-        "house_status": {"S": "Price update"},
+        ":house_value": {"N": str(get_price_int(house_info['house_value']))},
+        ":date_modified": {"S": today},
+        ":house_status": {"S": "Price update"},
         }
 
 def construct_deleted_item():
     return {
-        "date_deleted": {"S": today},
-        "house_status": {"S": "Deleted"},
+        ":date_deleted": {"S": today},
+        ":house_status": {"S": "Deleted"},
         }
 
 def put_new_item(item):
@@ -94,7 +94,7 @@ def put_new_item(item):
     return response
 
 def update_house(house_id, agence_name, updated_item):
-    expression = [f'{key}=:{key}' for key in updated_item.keys()]
+    expression = [f'{key[1:]}=:{key}' for key in updated_item.keys()]
     print(f'set {", ".join(expression)}')
     response = dynamodb_client.update_item(
         TableName=TABLE_NAME,
