@@ -5,6 +5,7 @@ from datetime import date
 #
 TABLE_NAME = "aba-get-house-listing"
 DATE_FORMAT = "%Y-%m-%d"
+AGENCES = ['century', 'joubeaux', 'agence_bizy', 'demeures_normandes', 'laforet', 'arthur_immo', 'desjardins', 'laref', 'auparkimmo', 'ifc_conseil', 'lesage', 'vernon_immo', 'plaza', 'square_habitat']
 
 dynamodb_client = boto3.client("dynamodb")
 dynamodb = boto3.resource("dynamodb")
@@ -39,20 +40,14 @@ def construct_item(house_info):
         "house_status": "New",
         }
 
-def put_new_item(item):
-    response = dynamodb_client.put_item(
-        TableName=TABLE_NAME,
-        Item=item
-    )
-    return response
+def batch_load_csv(agences):
+    for agence in agences:
+        item_csv_data = load_item_csv(f'tmp/{agence}_scrape.csv')
 
-item_csv_data = load_item_csv('tmp/demeures_normandes_scrape.csv')
+        for _, house_info in item_csv_data.items():
+            houses_batch.append(construct_item(house_info))
 
-for _, house_info in item_csv_data.items():
-    houses_batch.append(construct_item(house_info))
+    write_batch(houses_batch)
 
-print(houses_batch[0])
-
-# put_new_item(houses_batch[0])
-
-write_batch(houses_batch)
+if __name__ == "__main__":
+    batch_load_csv(AGENCES)
