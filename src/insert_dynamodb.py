@@ -104,13 +104,12 @@ def update_house(house_id, agence_name, updated_item):
         ReturnValues="UPDATED_NEW")
     return response['Attributes']
 
+def analyze_and_update_db(agence):
+    item_csv_data = load_item_csv(f'tmp/{agence}.csv')
+    db_response = load_item_db(table=TABLE_NAME, primary_value=agence)
+    item_db_data = process_db_response(db_response)
 
-
-item_csv_data = load_item_csv('tmp/agences.century_scrape.ori.csv')
-db_response = load_item_db(table=TABLE_NAME, primary_value='century')
-item_db_data = process_db_response(db_response)
-
-compare_db_csv_data(item_csv_data, item_db_data)
+    compare_db_csv_data(item_csv_data, item_db_data)
 
 # for item in items:
 #     put_new_item(item)
