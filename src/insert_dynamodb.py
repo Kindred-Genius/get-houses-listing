@@ -18,7 +18,8 @@ def get_price_int(price):
     return int(price.replace('€', '').strip().replace(' ', ''))
 
 def load_item_csv(csv):
-    df = pd.read_csv(csv, header=0, index_col=1)
+    df = pd.read_csv(csv, dtype=str, header=0, index_col=1)
+    df.index = df.index.astype(str)
     item_csv_data = df.to_dict('index')
     return item_csv_data
 
@@ -42,20 +43,19 @@ def process_db_response(db_response):
 
 def compare_db_csv_data(item_csv_data, item_db_data):
     for house_id, house_info in item_csv_data.items():
-        house_id = str(house_id)
         house_value = get_price_int(house_info['house_value'])
         if key_missing(item_db_data, house_id):
             print(house_id, ': does not exist , new item')
             new_item = construct_item(house_id, house_info)
             put_new_item(new_item)
             time.sleep(0.5)
-        elif house_value != int(item_db_data[house_id]):
+        elif house_value != int(item_db_data[house_value]):
             print(house_id, ': exist but price different')
             updated_item = construct_updated_item(house_info)
             update_house(house_id, house_info['agence_name'], updated_item)
             time.sleep(0.5)
     for house_id in item_db_data.keys():
-        if key_missing(item_csv_data, str(house_id)):
+        if key_missing(item_csv_data, house_id):
             print(house_id, ': item deleted')
             deleted_item = construct_deleted_item()
             update_house(house_id, house_info['agence_name'], deleted_item)
@@ -104,15 +104,10 @@ def update_house(house_id, agence_name, updated_item):
         ReturnValues="UPDATED_NEW")
     return response['Attributes']
 
-db_response =[{
-    'date_modified': {'S': '2023-09-17'}, 'house_url': {'S': 'https://www.century21.fr/trouver_logement/detail/6603199178/'}, 'house_id': {'S': '6603199178'}, 'date_deleted': {'S': ''}, 'date_created': {'S': '2023-09-17'},
-     'agence_name': {'S': 'century'}, 'house_value': {'N': '528000'}}, {'date_modified': {'S': '2023-09-17'}, 'house_url': {'S': 'https://www.century21.fr/trouver_logement/detail/6934937708/'}, 'house_id': {'S': '6934937708'}, 'date_deleted': {'S': ''}, 'date_created': {'S': '2023-09-17'}, 'agence_name': {'S': 'century'}, 'house_value': {'N': '264000'}
-    }]
 
 
 item_csv_data = load_item_csv('tmp/agences.century_scrape.ori.csv')
-# item_db_data = load_item_db(table=TABLE_NAME, primary_value='century')
-item_db_data = process_db_response(db_response)
+item_db_data = load_item_db(table=TABLE_NAME, primary_value='century')
 
 compare_db_csv_data(item_csv_data, item_db_data)
 
@@ -120,7 +115,10 @@ compare_db_csv_data(item_csv_data, item_db_data)
 #     put_new_item(item)
 #     time.sleep(1)
 
-
+db_response =[{
+    'date_modified': {'S': '2023-09-17'}, 'house_url': {'S': 'https://www.century21.fr/trouver_logement/detail/6603199178/'}, 'house_id': {'S': '6603199178'}, 'date_deleted': {'S': ''}, 'date_created': {'S': '2023-09-17'},
+     'agence_name': {'S': 'century'}, 'house_value': {'N': '528000'}}, {'date_modified': {'S': '2023-09-17'}, 'house_url': {'S': 'https://www.century21.fr/trouver_logement/detail/6934937708/'}, 'house_id': {'S': '6934937708'}, 'date_deleted': {'S': ''}, 'date_created': {'S': '2023-09-17'}, 'agence_name': {'S': 'century'}, 'house_value': {'N': '264000'}
+    }]
 
 items = [{
             "agence_name": {"S": "century"},
