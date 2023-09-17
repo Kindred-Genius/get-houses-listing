@@ -7,6 +7,7 @@ from datetime import date
 dynamodb_client = boto3.client("dynamodb")
 TABLE_NAME = "aba-get-house-listing"
 DATE_FORMAT = "%Y-%m-%d"
+AGENCES = ['century', 'joubeaux', 'agence_bizy', 'demeures_normandes', 'laforet', 'arthur_immo', 'desjardins', 'laref', 'auparkimmo', 'ifc_conseil', 'lesage', 'vernon_immo', 'plaza', 'square_habitat']
 
 today = date.today().strftime(DATE_FORMAT)
 
@@ -104,46 +105,14 @@ def update_house(house_id, agence_name, updated_item):
         ReturnValues="UPDATED_NEW")
     return response['Attributes']
 
-def analyze_and_update_db(agence):
+def analyze_agence(agence):
     item_csv_data = load_item_csv(f'tmp/{agence}.csv')
     db_response = load_item_db(table=TABLE_NAME, primary_value=agence)
     item_db_data = process_db_response(db_response)
 
     compare_db_csv_data(item_csv_data, item_db_data)
 
-# for item in items:
-#     put_new_item(item)
-#     time.sleep(1)
+def analyze_and_update_db():
+    for agence in AGENCES:
+        analyze_agence(agence)
 
-db_response =[{
-    'date_modified': {'S': '2023-09-17'}, 'house_url': {'S': 'https://www.century21.fr/trouver_logement/detail/6603199178/'}, 'house_id': {'S': '6603199178'}, 'date_deleted': {'S': ''}, 'date_created': {'S': '2023-09-17'},
-     'agence_name': {'S': 'century'}, 'house_value': {'N': '528000'}}, {'date_modified': {'S': '2023-09-17'}, 'house_url': {'S': 'https://www.century21.fr/trouver_logement/detail/6934937708/'}, 'house_id': {'S': '6934937708'}, 'date_deleted': {'S': ''}, 'date_created': {'S': '2023-09-17'}, 'agence_name': {'S': 'century'}, 'house_value': {'N': '264000'}
-    }]
-
-items = [{
-            "agence_name": {"S": "century"},
-            "house_id": {"S": "6934937708"},
-            "house_url": {"S": "https://www.century21.fr/trouver_logement/detail/6934937708/"},
-            "house_value": {"N": "264000"},
-            "date_created": {"S": "2023-09-17"},
-            "date_modified": {"S": "2023-09-17"},
-            "date_deleted": {"S": ""},
-        },
-        {
-            "agence_name": {"S": "century"},
-            "house_id": {"S": "6603199178"},
-            "house_url": {"S": "https://www.century21.fr/trouver_logement/detail/6603199178/"},
-            "house_value": {"N": "528000"},
-            "date_created": {"S": "2023-09-17"},
-            "date_modified": {"S": "2023-09-17"},
-            "date_deleted": {"S": ""},
-        },
-        {
-            "agence_name": {"S": "demeures_normandes"},
-            "house_id": {"S": "111-350174"},
-            "house_url": {"S": "https://auxdemeuresnormandes.com/property/maison-de-174-m%c2%b2-a-15-mn-de-vernon/"},
-            "house_value": {"N": "350000"},
-            "date_created": {"S": "2023-09-16"},
-            "date_modified": {"S": ""},
-            "date_deleted": {"S": ""},
-        }]

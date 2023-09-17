@@ -1,4 +1,5 @@
 import puts3
+import insert_dynamodb
 #
 import agences.arthur_immo
 import agences.agence_bizy
@@ -38,3 +39,10 @@ agences.vernon_immo.init()
 # 
 
 puts3.put_csv_s3()
+
+#
+#
+insert_dynamodb.analyze_agence()
+#
+#
+
