@@ -10,6 +10,7 @@ from helpers import get_text_data, append_csv, _serialize_html
 
 BASE_URL = 'https://www.stephaneplazaimmobilier.com'
 URL = BASE_URL + '/immobilier-acheter?type=2&location=27681&now=1&page=2'
+AGENCE = __name__.replace('agences.', '')
 
 def get_html():
     # the interface for turning on headless mode 
@@ -45,7 +46,7 @@ def fetch(html):
         house_refs[house_ref] = True
         price, surface, room, bedrooms = get_text_data(house.text)
         house_data.append({
-            "source": __name__,
+            "source": AGENCE,
             "house_ref": house_ref,
             "url": f'{BASE_URL}{relative_url}',
             "price": price,
@@ -53,7 +54,7 @@ def fetch(html):
             "room": room,
             "bedrooms": bedrooms
         })
-    append_csv(house_data, __name__)
+    append_csv(house_data, AGENCE)
 
 def init():
     html = get_html()

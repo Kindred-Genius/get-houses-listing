@@ -6,6 +6,7 @@ from helpers import get_text_data, append_csv
 
 BASE_URL = 'https://www.laforet.com'
 URL = BASE_URL + '/acheter/rechercher?filter%5Bcities%5D=27681&filter%5Btypes%5D=house'
+AGENCE = __name__.replace('agences.', '')
 
 def fetch(url):
     response = requests.get(url=url, headers=HEADERS)
@@ -20,7 +21,7 @@ def fetch(url):
         house_ref = relative_url.split('-')[-1]
         price, surface, room, bedrooms = get_text_data(house.find("div", class_="card-bottom").text)
         house_data.append({
-            "source": __name__,
+            "source": AGENCE,
             "house_ref": house_ref,
             "url": f'{BASE_URL}{relative_url}',
             "price": price,
@@ -28,7 +29,7 @@ def fetch(url):
             "room": room,
             "bedrooms": bedrooms
         })
-    append_csv(house_data, __name__)
+    append_csv(house_data, AGENCE)
 
 def init():
     fetch(URL)

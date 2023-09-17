@@ -12,6 +12,7 @@ from helpers import get_text_data, append_csv, _get_local_html
 
 BASE_URL = 'https://www.joubeaux-immobilier.com'
 URL = BASE_URL
+AGENCE = __name__.replace('agences.', '')
 
 def get_html():
     # the interface for turning on headless mode 
@@ -70,7 +71,7 @@ def fetch(html='test'):
         
         price, surface, room, bedrooms = get_text_data(house_card.text)
         house_data.append({
-            "source": __name__,
+            "source": AGENCE,
             "house_ref": house_ref,
             "url": f'{BASE_URL}{relative_url}',
             "price": price,
@@ -78,7 +79,7 @@ def fetch(html='test'):
             "room": room,
             "bedrooms": bedrooms
         })
-    append_csv(house_data, __name__)
+    append_csv(house_data, AGENCE)
 
 def init():
     html = get_html()

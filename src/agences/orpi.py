@@ -11,6 +11,7 @@ from helpers import get_text_data, append_csv, _serialize_html, _get_local_html
 
 BASE_URL = 'https://www.orpi.com'
 URL = BASE_URL + '/recherche/buy?realEstateTypes%5B%5D=maison&locations%5B0%5D%5Bvalue%5D=vernon&locations%5B0%5D%5Blabel%5D=Vernon%20%2827200%29&sort=date-down&layoutType=mixte&recentlySold=false'
+AGENCE = __name__.replace('agences.', '')
 
 def get_html():
 
@@ -48,7 +49,7 @@ def fetch(html='test'):
         
         price, surface, room, bedrooms = get_text_data(house_card.get_text('\n', strip=True))
         house_data.append({
-            "source": __name__,
+            "source": AGENCE,
             "house_ref": house_ref,
             "url": complete_url,
             "price": price,
@@ -56,7 +57,7 @@ def fetch(html='test'):
             "room": room,
             "bedrooms": bedrooms
         })
-    append_csv(house_data, __name__)
+    append_csv(house_data, AGENCE)
 
 def init():
     html = get_html()

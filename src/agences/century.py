@@ -8,6 +8,7 @@ from helpers import get_text_data, append_csv, _serialize_html
 
 BASE_URL = 'https://www.century21.fr'
 URL = BASE_URL + '/annonces/achat-maison/cpv-27200_vernon'
+AGENCE = __name__.replace('agences.', '')
 
 def fetch(url):
     response = requests.get(url=url, headers=HEADERS)
@@ -38,7 +39,7 @@ def fetch(url):
         price, surface, room, bedrooms = get_text_data(house.find("div",
                                                                   class_="c-the-property-thumbnail-with-content__col-right").text)
         house_data.append({
-            "source": __name__,
+            "source": AGENCE,
             "house_ref": house_ref,
             "url": f'{BASE_URL}{relative_url}',
             "price": price,
@@ -46,7 +47,7 @@ def fetch(url):
             "room": room,
             "bedrooms": bedrooms
         })
-    append_csv(house_data, __name__)
+    append_csv(house_data, AGENCE)
 
 
 def init():

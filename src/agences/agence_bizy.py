@@ -7,6 +7,7 @@ from helpers import get_text_data, append_csv, _serialize_html
 
 BASE_URL = 'https://www.agencedebizy.fr'
 URL = BASE_URL + '/vente/maisons-villas'
+AGENCE = __name__.replace('agences.', '')
 
 def get_html():
 
@@ -39,7 +40,7 @@ def fetch(html='test'):
         price, surface, room, bedrooms = get_text_data(house.get_text('\n', strip=True))
 
         house_data.append({
-            "source": __name__,
+            "source": AGENCE,
             "house_ref": house_ref,
             "url": complete_url,
             "price": price,
@@ -47,7 +48,7 @@ def fetch(html='test'):
             "room": room,
             "bedrooms": bedrooms
         })
-    append_csv(house_data, __name__)
+    append_csv(house_data, AGENCE)
 
 def init():
     html = get_html()

@@ -8,11 +8,11 @@ from helpers import get_text_data, append_csv
 
 BASE_URL = 'https://www.safti.fr'
 URL = BASE_URL + '/recherche?project=achat&properties=maison&localities=vernon-27200&page=1&hasRendered=1'
-CHROME_DRIVER = "/Users/aba/home/utils/chromedriver/chromedriver"
+AGENCE = __name__.replace('agences.', '')
 
 
 def get_html():
-    driver = webdriver.Chrome(CHROME_DRIVER)
+    driver = webdriver.Chrome()
     driver.get(URL)
 
     time.sleep(2)
@@ -41,7 +41,7 @@ def fetch(html='test'):
 
         price, surface, room, bedrooms = get_text_data(card.prettify())
         house_data.append({
-            "source": __name__,
+            "source": AGENCE,
             "house_ref": house_ref,
             "url": f'{BASE_URL}{relative_url}',
             "price": price,
@@ -49,7 +49,7 @@ def fetch(html='test'):
             "room": room,
             "bedrooms": bedrooms
         })
-    append_csv(house_data, __name__)
+    append_csv(house_data, AGENCE)
 
 def init():
     html = get_html()
