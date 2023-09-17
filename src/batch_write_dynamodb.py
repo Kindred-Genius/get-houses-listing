@@ -17,8 +17,7 @@ def get_price_int(price):
     return int(price.replace('€', '').strip().replace(' ', ''))
 
 def load_item_csv(csv):
-    df = pd.read_csv(csv, dtype=str, header=0)
-    df.index = df.index.astype(str)
+    df = pd.read_csv(csv, dtype=str, header=0, index_col=False)
     item_csv_data = df.to_dict('index')
     return item_csv_data
 
