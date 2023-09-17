@@ -74,7 +74,8 @@ def return_csv_line(house):
 def append_csv(house_data, filename='unknown'):
     csv_filepath = f'./tmp/{filename}_scrape.csv'
     csv_data = list(map((lambda x: return_csv_line(x)), house_data))  
-    with open(csv_filepath, 'a') as file:
+    with open(csv_filepath, 'w') as file:
+         file.write('agence_name,house_id,house_url,house_value,house_surface,house_room,house_bedroom\n')
          file.write('\n'.join(csv_data) + '\n')
 
 def decode_str(str):
