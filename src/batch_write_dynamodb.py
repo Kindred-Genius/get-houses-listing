@@ -29,14 +29,14 @@ def write_batch(houses):
 
 def construct_item(house_info):
     return {
-        "agence_name": {"S": house_info['agence_name']},
-        "house_id": {"S": house_info['house_id']},
-        "house_url": {"S": house_info['house_url']},
-        "house_value": {"N": str(get_price_int(house_info['house_value']))},
-        "date_created": {"S": today},
-        "date_modified": {"S": today},
-        "date_deleted": {"S": ""},
-        "house_status": {"S": "New"},
+        "agence_name": house_info['agence_name'],
+        "house_id": house_info['house_id'],
+        "house_url": house_info['house_url'],
+        "house_value": str(get_price_int(house_info['house_value'])),
+        "date_created": today,
+        "date_modified": today,
+        "date_deleted": "",
+        "house_status": "New",
         }
 
 def put_new_item(item):
@@ -53,6 +53,6 @@ for _, house_info in item_csv_data.items():
 
 print(houses_batch[0])
 
-put_new_item(houses_batch[0])
+# put_new_item(houses_batch[0])
 
-# write_batch(houses_batch)
+write_batch(houses_batch)
