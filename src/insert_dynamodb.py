@@ -15,7 +15,7 @@ def key_missing(dict, key):
     else: return True
 
 def get_price_int(price):
-    return int(price.replace('€', '').strip().replace(' ', ''))
+    return int(price.replace('€', '').strip().replace(' ', '').encode('ascii', "ignore"))
 
 def load_item_csv(csv):
     df = pd.read_csv(csv, dtype=str, header=0, index_col=1)

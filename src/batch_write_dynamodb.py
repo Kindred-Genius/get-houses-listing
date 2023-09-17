@@ -16,7 +16,7 @@ today = date.today().strftime(DATE_FORMAT)
 houses_batch = []
 
 def get_price_int(price):
-    return int(price.replace('€', '').strip().replace(' ', ''))
+    return int(price.replace('€', '').strip().replace(' ', '').encode('ascii', "ignore"))
 
 def load_item_csv(csv):
     df = pd.read_csv(csv, dtype=str, header=0, index_col=False)
@@ -42,6 +42,7 @@ def construct_item(house_info):
 
 def batch_load_csv(agences):
     for agence in agences:
+        print(agence)
         item_csv_data = load_item_csv(f'tmp/{agence}_scrape.csv')
 
         for _, house_info in item_csv_data.items():
