@@ -42,7 +42,7 @@ puts3.put_csv_s3()
 
 #
 #
-insert_dynamodb.analyze_agence()
+insert_dynamodb.analyze_and_update_db()
 #
 #
 
