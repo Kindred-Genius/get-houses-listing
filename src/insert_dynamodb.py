@@ -67,7 +67,7 @@ def construct_item(house_id, house_info):
         "agence_name": {"S": house_info['agence_name']},
         "house_id": {"S": str(house_id)},
         "house_url": {"S": house_info['house_url']},
-        "house_value": {"N": str(get_price_int(house_info['house_value']))},
+        "house_value": {"S": str(get_price_int(house_info['house_value']))},
         "date_created": {"S": today},
         "date_modified": {"S": today},
         "date_deleted": {"S": ""},
@@ -76,7 +76,7 @@ def construct_item(house_id, house_info):
 
 def construct_updated_item(house_info):
     return {
-        ":house_value": {"N": str(get_price_int(house_info['house_value']))},
+        ":house_value": {"S": str(get_price_int(house_info['house_value']))},
         ":date_modified": {"S": today},
         ":house_status": {"S": "Price update"},
         }
