@@ -116,3 +116,5 @@ def analyze_and_update_db():
     for agence in AGENCES:
         analyze_agence(agence)
 
+if __name__ == "__main__":
+    analyze_and_update_db()
