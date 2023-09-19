@@ -38,7 +38,7 @@ def process_db_response(db_response):
     item_db_data = {}
     for item in db_response:
         key = item['house_id']['S']
-        value = item['house_value']['N']
+        value = item['house_value']['S']
         item_db_data[key] = value
     return item_db_data
 
