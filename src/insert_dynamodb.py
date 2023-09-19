@@ -19,8 +19,8 @@ def get_price_int(price):
     return int(price.replace('€', '').strip().replace(' ', '').encode('ascii', "ignore"))
 
 def load_item_csv(csv):
-    df = pd.read_csv(csv, dtype=str, header=0, index_col=1)
-    df.index = df.index.astype(str)
+    df = pd.read_csv(csv, dtype=str, header=0, index_col=False)
+    df.set_index('house_id', inplace=True)
     item_csv_data = df.to_dict('index')
     return item_csv_data
 
@@ -96,7 +96,6 @@ def put_new_item(item):
 
 def update_house(house_id, agence_name, updated_item):
     expression = [f'{key[1:]}={key}' for key in updated_item.keys()]
-    print(f'set {", ".join(expression)}')
     response = dynamodb_client.update_item(
         TableName=TABLE_NAME,
         Key={'agence_name': {"S": agence_name}, 'house_id': {"S": house_id}},
