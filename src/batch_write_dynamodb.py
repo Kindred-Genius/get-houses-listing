@@ -33,7 +33,7 @@ def construct_item(house_info):
         "agence_name": house_info['agence_name'],
         "house_id": house_info['house_id'],
         "house_url": house_info['house_url'],
-        "house_value": str(get_price_int(house_info['house_value'])),
+        "house_value": get_price_int(house_info['house_value']),
         "date_created": today,
         "date_modified": today,
         "date_deleted": "",

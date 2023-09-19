@@ -106,7 +106,7 @@ def update_house(house_id, agence_name, updated_item):
     return response['Attributes']
 
 def analyze_agence(agence):
-    item_csv_data = load_item_csv(f'tmp/{agence}.csv')
+    item_csv_data = load_item_csv(f'tmp/{agence}_scrape.csv')
     db_response = load_item_db(table=TABLE_NAME, primary_value=agence)
     item_db_data = process_db_response(db_response)
 
