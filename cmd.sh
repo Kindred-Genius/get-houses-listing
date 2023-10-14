@@ -2,7 +2,7 @@
 
 sudo apt-get update && sudo apt-get upgrade -y
 
-sudo apt install git unzip wget curl -y
+sudo apt install git unzip wget curl firefox -y
 
 curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64-2.0.30.zip" -o "awscliv2.zip"
 unzip awscliv2.zip

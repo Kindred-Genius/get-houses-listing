@@ -26,6 +26,9 @@ def get_html():
 
     html = driver.page_source
 
+    _serialize_html(driver.find_element(by=By.XPATH, value="//html").text, 'text.txt')
+    _serialize_html(driver.find_element(by=By.XPATH, value="//html").get_attribute('innerHTML'), 'inner.html')
+    _serialize_html(driver.find_element(by=By.XPATH, value="//html").get_attribute('outerHTML'), 'outer.html')
     driver.quit()
 
     return html
@@ -60,8 +63,8 @@ def fetch(html='test'):
     append_csv(house_data, AGENCE)
 
 def init():
-    html = get_html()
-    _serialize_html(html, "orpi.html")
+    # html = get_html()
+    html = _get_local_html('outer.html')
     fetch(html)
 
 if __name__ == "__main__":

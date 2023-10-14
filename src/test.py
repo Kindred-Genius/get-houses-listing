@@ -21,7 +21,7 @@ import agences.vernon_immo
 # agences.arthur_immo.init()
 # agences.auparkimmo.init()
 # agences.century.init()
-agences.demeures_normandes.init()
+# agences.demeures_normandes.init()
 # agences.desjardins.init()
 # agences.ifc_conseil.init()
 # agences.joubeaux.init()
